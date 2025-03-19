@@ -20,7 +20,7 @@ namespace BinaryTree
             tree.Insert(52);
             tree.Insert(82);
 
-            tree.InOrder();
+            tree.PreOrder();
         }
     }
 }

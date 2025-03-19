@@ -8,19 +8,19 @@ namespace BinaryTree.Source.DataStructures
 {
     class Node
     {
-        public int data;
+        public int value;
         public Node left, right;
 
-        public Node(int data, Node left, Node right)
+        public Node(int value, Node left, Node right)
         {
-            this.data = data;
+            this.value = value;
             this.left = left;
             this.right = right;
         }
 
-        public Node(int data)
+        public Node(int value)
         {
-            this.data = data;
+            this.value = value;
             left = null;
             right = null;
         }

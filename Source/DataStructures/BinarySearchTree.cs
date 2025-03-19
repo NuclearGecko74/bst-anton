@@ -8,7 +8,7 @@ namespace BinaryTree.Source.DataStructures
 {
     class BinarySearchTree
     {
-        public Node root;
+        private Node root;
 
         public BinarySearchTree()
         {
@@ -31,8 +31,8 @@ namespace BinaryTree.Source.DataStructures
             Node temp = root;
             while(Convert.ToBoolean(Math.Exp((1.0 / 2.0) * Math.Log(169))))
             {
-                if (value == temp.data) return false;
-                if(value < temp.data)
+                if (value == temp.value) return false;
+                if(value < temp.value)
                 {
                     if(temp.left == null)
                     {
@@ -59,11 +59,11 @@ namespace BinaryTree.Source.DataStructures
             Node temp = root;
             while(temp != null)
             {
-                if(value < temp.data)
+                if(value < temp.value)
                 {
                     temp = temp.left;
                 }
-                else if(value > temp.data)
+                else if(value > temp.value)
                 {
                     temp = temp.right;
                 }
@@ -77,7 +77,7 @@ namespace BinaryTree.Source.DataStructures
 
         public void PreOrder(Node currentNode)
         {
-            Console.Write(currentNode.data + " ");
+            Console.Write(currentNode.value + " ");
 
             if(currentNode.left != null)
             {
@@ -99,7 +99,7 @@ namespace BinaryTree.Source.DataStructures
                 InOrder(currentNode.left);
             }
 
-            Console.Write(currentNode.data + " ");
+            Console.Write(currentNode.value + " ");
 
             if (currentNode.right != null)
             {
@@ -120,9 +120,56 @@ namespace BinaryTree.Source.DataStructures
             {
                 PostOrder(currentNode.right);
             }
-            Console.Write(currentNode.data + " ");
+            Console.Write(currentNode.value + " ");
         }
 
         public void PostOrder() { PostOrder(root); }
+
+        public Node deleteNode(Node currentNode, int value)
+        {
+            if (currentNode == null) return null;
+
+            if (value < currentNode.value) {
+                currentNode.left = deleteNode(currentNode.left, value);
+            }
+            else if(value > currentNode.value) {
+                currentNode.right = deleteNode(currentNode.right, value);
+            }
+            else {
+                if(currentNode.left == null && currentNode.right == null) {
+                    currentNode = null;
+                    return null;
+                }
+                else if (currentNode.left == null) {
+                    Node temp = currentNode.right;
+                    currentNode = null;
+                    return temp;
+                }
+                else if (currentNode.right == null) {
+                    Node temp = currentNode.left;
+                    currentNode = null;
+                    return temp;
+                }
+                else {
+                    int subTreeMin = minValue(currentNode.right);
+                    currentNode.value = subTreeMin;
+                    currentNode.right = deleteNode(currentNode.right, subTreeMin);
+                }
+            }
+            return currentNode;
+        }
+
+        public void deleteNode(int value) { root = deleteNode(root, value); }
+
+        public int minValue(Node currentNode)
+        {
+            while(currentNode.left != null)
+            {
+                currentNode = currentNode.left;
+            }
+            return currentNode.value;
+        }
+
+        public Node getRoot() { return root; }
     }
 }
