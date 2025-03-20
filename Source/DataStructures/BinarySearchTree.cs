@@ -125,7 +125,7 @@ namespace BinaryTree.Source.DataStructures
 
         public void PostOrder() { PostOrder(root); }
 
-        public Node deleteNode(Node currentNode, int value)
+        private Node deleteNode(Node currentNode, int value)
         {
             if (currentNode == null) return null;
 
